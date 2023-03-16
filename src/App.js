@@ -2,6 +2,9 @@ import FunctionalComponent from './components/FunctionalComponent'
 import StateComponent from './state/stateExample';
 import ChangeState from './state/ChangeState';
 import ClassBaseComponent from './components/ClassBaseComponent'
+import SignUp from './conditional/If'
+import Logical from './conditional/Logical&&'
+import Render from './conditional/ConditionalRenderingExample';
 
 function App() {
 
@@ -110,8 +113,10 @@ console.log(myUpdatedVehicle);
   < ClassBaseComponent />
   < FunctionalComponent />
   < StateComponent />
-  < ChangeState/>
-  </>
+  < ChangeState />
+  < Render />
+</>
+
   );
 }
 
