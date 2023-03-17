@@ -5,6 +5,8 @@ import ClassBaseComponent from './components/ClassBaseComponent'
 import SignUp from './conditional/If'
 import Logical from './conditional/Logical&&'
 import Render from './conditional/ConditionalRenderingExample';
+import './App.css';  
+import TableComponent from './table/tableComponent'  
 
 function App() {
 
@@ -115,6 +117,7 @@ console.log(myUpdatedVehicle);
   < StateComponent />
   < ChangeState />
   < Render />
+  {/* < TableComponent /> */}
 </>
 
   );
