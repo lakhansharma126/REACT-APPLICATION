@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -42,5 +42,5 @@ body {
   color: yellow;  
   padding: 40px;  
   font-family: Arial;  
-  text-align: center;  
+  text-align: left;  
 }  

@@ -1,7 +1,12 @@
 import React from 'react'  
+import App from '../App';
 class About extends React.Component {  
   render() {  
-    return <h1>Welcome to About</h1>  
+    return ( 
+    <>
+    < App />
+    <h1>Welcome to About</h1>
+    </>  )
   }  
 }  
 export default About;

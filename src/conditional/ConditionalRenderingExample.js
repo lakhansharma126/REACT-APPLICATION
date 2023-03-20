@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import App from '../App';
 
 function Message(props)   
 {   
@@ -32,7 +33,6 @@ this.state ={isLoggedIn: false}
 }
 
 handleLogin(){
-    alert("hello");
     this.setState({isLoggedIn:true});
 }
 
@@ -43,6 +43,8 @@ handleLogout(){
 
 render(){
 return (<div>
+    < App />
+ <br></br>
 <h1>Conditional Rendering Example</h1>
 <Message isLoggedIn ={this.state.isLoggedIn} />
 {

@@ -2,20 +2,31 @@ import {NavLink} from 'react-router-dom'
 function NavComponent(){
 return (<ul>  
         <li>  
-        <NavLink to="/" exact activeStyle={  
+        <NavLink to="/list" exact activeStyle={  
              {color:'red'}  
-          }>Home</NavLink>  
+          }>React List Example</NavLink>  
         </li>  
         <li>  
-        <NavLink to="/about" exact activeStyle={  
+        <NavLink to="/conditionalRender" exact activeStyle={  
              {color:'green'}  
-          }>About</NavLink>  
+          }>Conditional Rendering Component</NavLink>  
         </li>  
         <li>  
-          <NavLink to="/contact" exact activeStyle={  
+          <NavLink to="/state" exact activeStyle={  
              {color:'magenta'}  
-          }>Contact</NavLink>  
+          }>State Example</NavLink>  
         </li>  
+        <li>  
+          <NavLink to="/state" exact activeStyle={  
+             {color:'magenta'}  
+          }>Change Letter In Upper Case</NavLink>  
+        </li>
+        <li>
+        <NavLink to="/hook" exact activeStyle={  
+             {color:'magenta'}  
+          }>Hook Use</NavLink>  
+        </li>  
+
       </ul>  );
 
 }

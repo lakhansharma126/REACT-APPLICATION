@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import App from '../App';
 
 class StudentName extends React.Component{
 
@@ -42,9 +43,10 @@ constructor(){
 }
 
     render(){
-
         return(
         <div>
+            < App />
+            <br></br>
             <StudentName />
             <ul >{this.state.data.map((item) => <List data ={item} />)}</ul>
         </div>

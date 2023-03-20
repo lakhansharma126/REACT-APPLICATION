@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import App from '../App';
 
 class ChangeState extends React.Component {
     constructor() {
@@ -18,6 +19,8 @@ class ChangeState extends React.Component {
     render() {
       return (
         <div>
+           < App />
+           <br></br>
           <h1>My {this.state.brand}</h1>
           <p>
             It is a {this.state.color} {this.state.model} from {this.state.year}.

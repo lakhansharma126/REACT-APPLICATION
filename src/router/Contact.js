@@ -1,4 +1,5 @@
 import React from 'react'  
+import App from '../App';
 
 
 class Contact extends React.Component {  
@@ -12,6 +13,7 @@ class Contact extends React.Component {
     };  
     return( 
    <>
+    < App />
     <h1 style={mystyle}>Welcome to Contact</h1>
     </>
     ) 
