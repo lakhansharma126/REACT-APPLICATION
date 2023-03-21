@@ -37,10 +37,8 @@
   }
 }
 
-body {  
-  background-color: #008080;  
+body {   
   color: yellow;  
-  padding: 40px;  
   font-family: Arial;  
   text-align: left;  
 }  

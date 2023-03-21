@@ -1,22 +1,13 @@
 import React from 'react'  
 import App from '../App';
 
-
-class Contact extends React.Component {  
-  
-  render() {  
-    const mystyle = {  
-      color: "Green",  
-      backgroundColor: "lightBlue",  
-      padding: "10px",  
-      fontFamily: "Arial"  
-    };  
-    return( 
-   <>
+export default function Contact() {
+  return (
+    <>
     < App />
-    <h1 style={mystyle}>Welcome to Contact</h1>
+    < div className='container'>
+    <h1>Welcome to Contact</h1>
+    </div> 
     </>
-    ) 
-  }  
-}  
-export default Contact;
+  )
+}

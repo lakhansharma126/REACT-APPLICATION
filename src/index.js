@@ -11,11 +11,13 @@ import Notfound from './router/notfound'
 import Action from '../src/action'  
 import ChangeState from './state/ChangeState';
 import Hook from './hook/countApp';
+import TextForm from './TextForm';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const routing =(
+  
 <Router>
 <div>
 {/* <h1 style={{color: "Green"}}>React Router Example</h1> */}
@@ -29,7 +31,7 @@ const routing =(
 <Route path='/conditionalRender' Component={Render}></Route>
 <Route path='/state' Component={ChangeState}></Route>
 <Route path='/hook' Component={Hook}></Route>
-
+<Route path='/form'  Component={() => <TextForm  />}></Route>
 
 </Routes>
 </div>
