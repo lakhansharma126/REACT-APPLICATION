@@ -6,7 +6,7 @@ export default function Contact() {
     <>
     < App />
     < div className='container'>
-    <h1>Welcome to Contact</h1>
+    <h1>Welcome to Karan</h1>
     </div> 
     </>
   )
