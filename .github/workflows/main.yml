@@ -1,14 +1,13 @@
 name: "test"
-on: push
+on:  
+ push:
+   branches: [ master ]
 jobs:
   test:
     runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-      with:
-        path: "./"
-
     - name: get properties
       id: json_properties
       uses: ./
@@ -19,12 +18,3 @@ jobs:
         echo ${{steps.json_properties.outputs.name}}
         echo ${{steps.json_properties.outputs.version}}
         
-    - name: get specified property
-      id: repository_type
-      uses: ./
-      with: 
-        file_path: 'package.json'
-        prop_path: 'repository.type'
-
-    - run: |
-        echo ${{steps.repository_type.outputs.value}}
