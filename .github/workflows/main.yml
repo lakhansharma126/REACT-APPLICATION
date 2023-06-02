@@ -13,6 +13,9 @@ jobs:
       uses: "zoexx/github-action-json-file-properties@release"
       with:
        file_path: "package.json"
+    - run: |
+                echo ${{steps.json_properties.outputs.name}}
+                echo ${{steps.json_properties.outputs.version}}
 
 
 
