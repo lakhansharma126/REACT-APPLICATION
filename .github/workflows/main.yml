@@ -4,9 +4,14 @@ on:
    branches: [ main ]
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: "windows-latest"
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+    - name: "Checkout"
+      uses: "actions/checkout@v3"
+    - name: "get properties"
+      id: "json_properties"
+
+
+
 
         
