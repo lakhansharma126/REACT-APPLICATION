@@ -8,7 +8,6 @@ import CountApp from './hook/countApp';
 import App from './App';
 import NavLink from './router/NavLink'
 function Action(){
-
 return(
 <>
 < App />
