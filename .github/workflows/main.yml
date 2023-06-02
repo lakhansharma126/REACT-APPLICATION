@@ -11,6 +11,8 @@ jobs:
     - name: "get properties"
       id: "json_properties"
       uses: "zoexx/github-action-json-file-properties@release"
+      with:
+       file_path: "package.json"
 
 
 
