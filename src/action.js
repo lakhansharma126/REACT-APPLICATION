@@ -14,9 +14,7 @@ return(
 <br />
 <NavLink />
 </>
-
 );
-
 }
 
 export default Action;
