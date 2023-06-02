@@ -8,12 +8,5 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: get properties
-      id: json_properties
-      with: 
-        file_path: 'package.json'
 
-    - run: |
-        echo ${{steps.json_properties.outputs.name}}
-        echo ${{steps.json_properties.outputs.version}}
         
