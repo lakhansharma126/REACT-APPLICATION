@@ -19,14 +19,13 @@ class ChangeState extends React.Component {
     render() {
       return (
         <div>
-           < App />
            <br></br>
           <h1>My {this.state.brand}</h1>
           <p>
             It is a {this.state.color} {this.state.model} from {this.state.year}.
           </p>
           <button
-            type="button"
+            type="button" className='btn btn-primary'
             onClick={this.changeColor}
           >Change color</button>
         </div>

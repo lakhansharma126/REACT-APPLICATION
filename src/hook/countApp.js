@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react';  
-import App from '../App';
-  
+
 function CountApp() {  
   // Declare a new state variable, which we'll call "count"  
   const [plus, setPlus] = useState(0);  
@@ -11,7 +10,6 @@ function CountApp() {
   });  
   return (  
     <div>  
-       < App />
        <br></br> 
       <p>You clicked {plus} times</p>  
       <button type='button' onClick={() => setPlus(plus + 1)}>  

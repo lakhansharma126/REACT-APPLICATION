@@ -1,17 +1,16 @@
+import React from 'react'
 
-<html>
-<body>
-<script>
-   function destructArray() {
-    const vehicles = ['mustang', 'f-150', 'expedition'];
-    return const [car, truck, suv] = vehicles;
-   }
+export default function arrayDestructring() {
+   const vehicles = ['mustang', 'f-150', 'expedition'];
+   const [car, truck, suv] = vehicles;
+  
+   return (
+    <div style={{textAlign:'center'}}>
+      <h1>Vechiles Details</h1>
+      <h3>{car}</h3>
+      <h3>{truck}</h3>
+      <h3>{suv}</h3>
+    </div>
+  )
 
-const [car, truck, suv] =destructArray();
-document.write("<p>Sum: " + car + "</p>");
-document.write("<p>Difference " + truck + "</p>");
-document.write("<p>Product: " + suv + "</p>");
-</script>
-
-</body>
-</html>
+}

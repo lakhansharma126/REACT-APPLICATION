@@ -1,0 +1,58 @@
+.container {
+height: 100%;
+width: 50%;
+border: 1px solid chocolate;
+border-radius: 10px;
+margin-left: 30%;
+margin-top: 0px;
+margin-bottom: 0px;
+text-align: center;
+}
+
+.line {
+    width: 100%;
+    border: 1px solid #C4C4C4;
+
+  }
+
+  .headerName {
+   color: orange;
+   font-weight: bold;
+  }
+
+  .button {
+  height: 40px;
+  width: 600px;
+  background-color: orange;
+  margin-left: 10px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 5px ;
+  }
+
+  .note {
+    color: red;
+  }
+
+  .totalKm{
+    width: 80px;
+    float: left;
+    margin-left: 80px;
+  }
+
+  .totalKmValue {
+    width: 80px;
+    float: left;
+    margin-left: 80px;
+    margin-top: 5px;
+  }
+
+  .parking {
+    width: 100px;
+    margin-left: 80px;
+  }
+
+
+
+  

@@ -43,7 +43,6 @@ handleLogout(){
 
 render(){
 return (<div>
-    < App />
  <br></br>
 <h1>Conditional Rendering Example</h1>
 <Message isLoggedIn ={this.state.isLoggedIn} />

@@ -1,32 +1,33 @@
 import {NavLink} from 'react-router-dom'  
+import "../Style.css";
 function NavComponent(){
-return (<ul>  
+return (<ul >  
         <li>  
-        <NavLink to="/list" exact activeStyle={  
-             {color:'red'}  
-          }>React List Example</NavLink>  
+        <NavLink to="/list"
+         className="linkRow">Class Component Example</NavLink>  
         </li>  
         <li>  
-        <NavLink to="/conditionalRender" exact activeStyle={  
-             {color:'green'}  
-          }>Conditional Rendering Component</NavLink>  
+        <NavLink to="/conditionalRender" 
+           className="linkRow">Conditional Rendering Component</NavLink>  
         </li>  
         <li>  
-          <NavLink to="/state" exact activeStyle={  
-             {color:'magenta'}  
-          }>State Example</NavLink>  
+          <NavLink to="/state"  className="linkRow">State Example</NavLink>  
         </li>  
         <li>  
-          <NavLink to="/state" exact activeStyle={  
-             {color:'magenta'}  
-          }>Change Letter In Upper Case</NavLink>  
+          <NavLink to="/form"className="linkRow" >Change Letter In Upper Case</NavLink>  
         </li>
         <li>
-        <NavLink to="/hook" exact activeStyle={  
-             {color:'magenta'}  
-          }>Hook Use</NavLink>  
+        <NavLink to="/hook"  className="linkRow">Hook Use</NavLink>  
         </li>  
-
+        <li>
+        <NavLink to="/array"  className="linkRow">Array Destrcuting </NavLink>  
+        </li>
+        <li>
+        <NavLink to="/rform" className="linkRow">Registration Form</NavLink>  
+        </li>  
+        <li>
+        <NavLink to="/login" className="linkRow">Login Form</NavLink>  
+        </li>  
       </ul>  );
 
 }

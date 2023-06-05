@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import App from '../App';
 
 class StudentName extends React.Component{
-
     render(){
-
-return (
+    return (
     <>
     <h1>Student Name List</h1>
     </>
@@ -25,7 +22,6 @@ render(){
 
 class ClassBaseComponent extends Component{
 constructor(){
-
     super();
     this.state ={
       data:[
@@ -45,7 +41,6 @@ constructor(){
     render(){
         return(
         <div>
-            < App />
             <br></br>
             <StudentName />
             <ul >{this.state.data.map((item) => <List data ={item} />)}</ul>

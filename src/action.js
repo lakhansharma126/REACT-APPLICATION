@@ -4,18 +4,21 @@ import ChangeState from './state/ChangeState';
 import ClassBaseComponent from './components/ClassBaseComponent'
 import Render from './conditional/ConditionalRenderingExample';
 import './App.css';  
+import "./Style.css";
 import CountApp from './hook/countApp';
-import App from './App';
 import NavLink from './router/NavLink'
 function Action(){
 
 return(
 <>
-< App />
-<br />
+<div className='App loginForm'>
+<div className="form">
+<div className="form-body">
 <NavLink />
+</div>
+</div>
+</div>
 </>
-
 );
 
 }

@@ -28,15 +28,14 @@ export default function About() {
     }
 
  }
-
  
   return (
     <>
-   <App />
+     <br></br>
    <div className='container' style={mystyle}>
     <h2>About Us</h2>
      <div className="accordion" id="accordionExample">
-  <div className="accordion-item">
+    <div className="accordion-item">
     <h2 className="accordion-header" id="headingOne">
       <button className="accordion-button" type="button" style={mystyle} data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
         Accordion Item #1
