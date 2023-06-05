@@ -1,0 +1,201 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy to Firebase
+
+env:
+  BASE_URL: "https://ff-int.api.wexer.com/"
+  BASE_URL_CFL: "https://test.api.wexer.com/"
+  BASE_URL_FF-INT: "https://ff-int.api.wexer.com/"
+  BASE_URL_STAGE: "https://stage.api.wexer.com/"
+  BASE_URL_PROD: "https://api.wexer.com/"
+  TIMEOUT: 3600
+
+
+# Controls when the workflow will run
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      app_version:
+        description: 'App Version x.x.x.'
+        required: true
+      tenant_id:
+        description: 'Client Folder Name'
+        required: true
+        default: 'wexer'
+      stripe_key:
+        description: 'Stripe Key'
+        required: true
+        default: 'pk_test_FmsCNtuI1CFaFiXuCHCRS8U3'
+      app_env:
+        type: choice
+        description: 'Environment'
+        required: true
+        options:
+          - 'CFL'
+          - 'FF-INT'
+          - 'STAGE'
+          - 'PROD'
+      is_release_preview:
+        description: 'Is Release Preview'
+        required: true
+        default: false
+        type: boolean
+      preview_release_name:
+        description: 'Preview Release Name'
+        required: true
+        default: 'preview'
+        type: string
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    # The type of runner that the job will run on
+    #needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      # add offset in runner number to avoid conflicts with other tags (previously added via Jenkins)
+      - name: runner number with offset
+        env:
+          NUM: ${{ github.run_number }}
+        run: |
+          echo "GITHUB_RUN_NUMBER_WITH_OFFSET=$(($NUM+819))" >> $GITHUB_ENV
+
+      - run: echo ${{ env.GITHUB_RUN_NUMBER_WITH_OFFSET }}
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.16.1
+
+      - uses: c-hive/gha-yarn-cache@v2
+
+      - name: Read data from JSON file workflows/deployment-config.json
+        uses: actions/github-script@v6
+        id: read-json
+        env:
+          TENANT_ID: ${{ github.event.inputs.tenant_id }}
+          BE_ENV: ${{ github.event.inputs.app_env }}
+        with:                  
+          script: |
+            const { TENANT_ID, BE_ENV } = process.env
+            const fs = require('fs');            
+            const data = fs.readFileSync('.github/workflows/deployment-config.json');            
+            const deploymentConfig = JSON.parse(data);
+            console.log(`Reading data for tenant => ${TENANT_ID}`);                        
+            const tenantConfigData = deploymentConfig[TENANT_ID]
+            const LOCALYTICS_ID = tenantConfigData.localyticsId
+            const firebaseConfig = tenantConfigData["env"][BE_ENV] 
+            const FIRBASE_PROJECT_ID = firebaseConfig.firebaseProjectId
+            const FIRBASE_SITE_ID = firebaseConfig.firebaseSiteId
+            const FIRBASE_AUTH_KEY = firebaseConfig.firebaseAuthKey
+            core.exportVariable('LOCALYTICS_ID', LOCALYTICS_ID)
+            core.exportVariable('FIRBASE_PROJECT_ID', FIRBASE_PROJECT_ID)
+            core.exportVariable('FIRBASE_SITE_ID', FIRBASE_SITE_ID)
+            core.exportVariable('FIRBASE_AUTH_KEY', FIRBASE_AUTH_KEY)
+            return 
+
+      - name: Set Base URL variable name based on the input
+        run: |
+          echo "BASE_URL_NAME=BASE_URL_${{ github.event.inputs.app_env }}" >> $GITHUB_ENV
+
+      - name: Set Web Player Home Image URL variable name based on the input
+        run: |
+          echo "webplayer_url_home=https://${{ env['FIRBASE_SITE_ID'] }}.web.app/home.jpg" >> $GITHUB_ENV
+
+      - name: Create firebase.json and .firebaserc file
+        run: |
+          node ./.github/scripts/create-firebase-json.js ${{ env['FIRBASE_SITE_ID'] }} ${{ env['FIRBASE_PROJECT_ID'] }}
+
+      - name: Print firebase.json
+        run: |
+          cat firebase.json
+          cat .firebaserc
+
+
+      - name: Verify Firebase Perf Monitoring file
+        run: |
+          node ./.github/scripts/verify-perf-monitoring.js ${{ env['FIRBASE_SITE_ID'] }} ${{ env['FIRBASE_PROJECT_ID'] }}
+
+
+      - name: Set Environment
+        run: |
+          cat << EOF > .env.production
+          REACT_APP_VERSION=${{ github.event.inputs.app_version }}.${{ env.GITHUB_RUN_NUMBER_WITH_OFFSET }}
+          REACT_APP_API_BASE_URL=${{ env[env.BASE_URL_NAME] }}
+          REACT_APP_API_CLIENT_ID=1234123412341234
+          REACT_APP_API_CLIENT_SECRET=573572796441127398913495789868468206481
+          REACT_APP_LOCALYTICS_APP_ID=${{ env['LOCALYTICS_ID'] }}
+          REACT_APP_LOCALYTICS_TIMEOUT=${{ env.timeout }}
+          REACT_APP_STRIPE_KEY=${{ github.event.inputs.stripe_key }}
+          REACT_APP_PLATFORM=${{ github.event.inputs.app_env }}
+          REACT_APP_FIREBASE_PROJECT=${{ env['FIRBASE_PROJECT_ID'] }}
+          REACT_APP_FIREBASE_SITE_NAME=${{ env['FIRBASE_SITE_ID'] }}
+          REACT_APP_API_KEY=${{ env['FIRBASE_AUTH_KEY'] }}
+          EOF
+
+      - name: Print .env.production
+        run: cat .env.production
+
+      - name: Print webplayer_url_home
+        run: echo "webplayer_url_home=${{ env.webplayer_url_home }}"
+
+      # - name: Move assets from client folder to source folder
+      #   run: |
+      #     cp -r clients/${{ github.event.inputs.tenant_id }}/* src/assets/
+      #     mv src/assets/images/favicon.ico public/
+      #     cp src/assets/images/home.jpg public/
+
+      # - name: Print config.json
+      #   run: |
+      #     cat src/assets/config.json
+
+      # - name: Install node modules
+      #   run: |
+      #     yarn install
+
+      # - name: Build the app
+      #   run: |
+      #     node ./preBuildScripts.js ${{ env.webplayer_url_home }} ${{ github.event.inputs.tenant_id }}
+      #     CI=false && yarn build
+
+      # - name: update manifest.json file and move it to build folder
+      #   run: |
+      #     echo '{
+      #       "short_name": "Consumer Web",
+      #       "name": "Consumer Web",
+      #       "verson": "${{ github.event.inputs.app_version }}.${{ env.GITHUB_RUN_NUMBER_WITH_OFFSET }}" ,
+      #       "start_url": "./index.html",
+      #       "display": "standalone",
+      #       "theme_color": "#000000",
+      #       "background_color": "#ffffff"
+      #     }' > manifest.json
+      #     cat manifest.json
+      #     mv manifest.json build/
+
+      # - name: Deploy to Firebase
+      #   if: ${{ github.event.inputs.is_release_preview == 'false' }}
+      #   uses: w9jds/firebase-action@v11.18.0
+      #   with:
+      #     args: deploy --only hosting
+      #   env:
+      #     PROJECT_ID: ${{ github.event.inputs.firebase_project_id }}
+      #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      # - name: Deploy to Firebase
+      #   if: ${{ github.event.inputs.is_release_preview == 'true' }}
+      #   uses: w9jds/firebase-action@v11.18.0
+      #   with:
+      #     args: hosting:channel:deploy ${{ github.event.inputs.preview_release_name }}
+      #   env:
+      #     PROJECT_ID: ${{ github.event.inputs.firebase_project_id }}
+      #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
