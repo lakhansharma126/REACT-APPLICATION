@@ -8,7 +8,6 @@ import "./Style.css";
 import CountApp from './hook/countApp';
 import NavLink from './router/NavLink'
 function Action(){
-
 return(
 <>
 <div className='App loginForm'>
@@ -20,7 +19,6 @@ return(
 </div>
 </>
 );
-
 }
 
 export default Action;
