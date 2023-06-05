@@ -1,0 +1,25 @@
+{
+    "TanantName": {
+        "test": {
+            "LocalyticsAppId": "xyz",
+            "StripeKey": "xyz",
+			"FirebaseProjectName":"xyz",
+			"FirebaseSiteName":"xyz",
+			"FirebaseAuthKey":"xyz"
+        },
+        "stage": {
+            "LocalyticsAppId": "xyz",
+            "StripeKey": "xyz",
+			"FirebaseProjectName":"xyz",
+			"FirebaseSiteName":"xyz",
+			"FirebaseAuthKey":"xyz"
+        },
+        "prod": {
+           "LocalyticsAppId": "xyz",
+            "StripeKey": "xyz",
+			"FirebaseProjectName":"xyz",
+			"FirebaseSiteName":"xyz",
+			"FirebaseAuthKey":"xyz"
+        }
+    }
+}
